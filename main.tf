@@ -27,3 +27,19 @@ resource "tfe_workspace_settings" "this" {
   workspace_id   = tfe_workspace.this[each.key].id
   execution_mode = each.value.execution_mode
 }
+
+resource "tfe_workspace_variable_set" "this" {
+  for_each        = {
+    for item in flatten([
+      for ws_key, ws in var.workspaces : [
+        for vs_id in coalesce(ws.variable_set_ids, []) : {
+          workspace_key = ws_key
+          varset_id    = vs_id
+        }
+      ]
+    ]) : "${item.workspace_key}.${item.varset_id}" => item
+  }
+
+  variable_set_id = each.value.varset_id
+  workspace_id    = tfe_workspace.this[each.value.workspace_key].id
+}
