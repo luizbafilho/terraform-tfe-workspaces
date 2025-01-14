@@ -17,6 +17,7 @@ variable "workspaces" {
     terraform_version         = string
     vendors_vars              = list(string)
     working_directory_prefix  = string
+    variable_set_ids         = list(string)
   }))
 }
 
@@ -32,11 +33,6 @@ variable "vcs" {
 
 variable "terraform_cloud_org" {
   description = "Terraform Cloud Org to create workspaces in"
-  type        = string
-}
-
-variable "terraform_cloud_workspace_name" {
-  description = "Terraform Cloud Workspace name"
   type        = string
 }
 
