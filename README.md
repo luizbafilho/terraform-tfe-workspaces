@@ -1,5 +1,3 @@
-<img src="https://trustd.solutions/images/logo.png"/>
-
 # Terraform Cloud Workspace Bootstrap
 
 ## Requirements
